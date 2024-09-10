@@ -3,13 +3,13 @@
     <el-row>
       <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
-        <el-form class="login_form">
+        <el-form class="login_form" :model="loginForm" :rules="rules" ref="loginForms">
           <h1>Hello</h1>
           <h2>欢迎来到ZJK管理系统</h2>
-          <el-form-item>
+          <el-form-item prop="username">
             <el-input :prefix-icon="User" v-model="loginForm.username"></el-input>
           </el-form-item>
-          <el-form-item>
+          <el-form-item prop="password">
             <el-input :prefix-icon="Lock" type="password" v-model="loginForm.password" show-password></el-input>
           </el-form-item>
           <el-form-item>
@@ -31,8 +31,10 @@ import { getWelcomeMessage } from '@/utils/time'
 let useStore = useUserStore() 
 let $router = useRouter()
 let loading = ref(false)
+let loginForms = ref()
 let loginForm = reactive({username: '', password: ''})
 const login = async () => {
+  await loginForms.value.validate()
   loading.value = true
   try {
     await useStore.userLogin(loginForm)
@@ -50,6 +52,24 @@ const login = async () => {
       message: (error as Error).message
     })
   }
+}
+
+const validatorUsername = (rule: any, value: any, callback: any) => {
+  if (value.length >= 5) {
+    callback()
+  } else {
+    callback(new Error('username length at least 5'))
+  }
+}
+
+const rules = {
+  username: [
+    // {required: true, min: 6, max: 10, message: 'at lease 6 length', trigger: 'blur'}
+    {trigger: 'blur', validator: validatorUsername}
+  ],
+  password: [
+    {required: true, min:6, max:15, message: 'password length at least 6', trigger:'change'}
+  ]
 }
 
 </script>
