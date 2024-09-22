@@ -4,7 +4,7 @@
         <div class="layout_slider">
             <Logo></Logo>
             <el-scrollbar class="scroll_bar">
-                <el-menu background-color="#001529" text-color="white">
+                <el-menu :default-active="$route.path" background-color="#001529" text-color="white">
                     <Menu :menuList="userStore.menuRoutes"></Menu>
                 </el-menu>
             </el-scrollbar>
@@ -25,8 +25,11 @@ import Logo from './logo/index.vue'
 import Menu from './menu/index.vue'
 import Main from './main/index.vue'
 import useUserStore from '@/store/modules/user';
+import { useRoute } from 'vue-router'
 
 let userStore = useUserStore();
+
+let $route = useRoute()
 
 </script>
 
