@@ -6,7 +6,7 @@ export const constRoute = [
     name: "login",
     meta: {
       title: '登录',
-      hidden: false,
+      hidden: true,
       icon: 'Promotion'
     }
   },
@@ -15,9 +15,9 @@ export const constRoute = [
     component: () => import("@/layout/index.vue"),
     name: "layout",
     meta: {
-      title: 'layout',
+      title: '',
       hidden: false,
-      icon: 'Avatar'
+      icon: ''
     },
     redirect: '/home',
     children: [
@@ -29,15 +29,6 @@ export const constRoute = [
           hidden: false,
           icon: 'HomeFilled'
         }
-      },
-      {
-        path: '/test',
-        component: () => import('@/views/home/index.vue'),
-        meta: {
-          title: 'test',
-          hidden: false,
-          icon: 'Histogram'
-        }
       }
     ]
   },
@@ -47,7 +38,7 @@ export const constRoute = [
     name: "404",
     meta: {
       title: '404',
-      hidden: false,
+      hidden: true,
       icon: 'DocumentDelete'
     }
   },
@@ -57,7 +48,7 @@ export const constRoute = [
     name: "any",
     meta: {
       title: '任意路由',
-      hidden: false,
+      hidden: true,
       icon: 'DataLine'
     }
   },
@@ -80,6 +71,7 @@ export const constRoute = [
       hidden: false,
       icon: 'Lock'
     },
+    redirect: '/acl/user',
     children: [
       {
         path: '/acl/user',
@@ -122,6 +114,7 @@ export const constRoute = [
       icon: 'Goods',
       hidden: false
     },
+    redirect: '/product/trademark',
     children: [
       {
         path: '/product/trademark',
