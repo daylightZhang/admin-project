@@ -5,30 +5,28 @@
             <Logo></Logo>
             <el-scrollbar class="scroll_bar">
                 <el-menu background-color="#001529" text-color="white">
-                    <el-menu-item index="1">首页</el-menu-item>
-                    <el-menu-item index="2">数据大屏</el-menu-item>
-                    <el-menu-item index="3">xxx</el-menu-item>
-                    <el-sub-menu index="4">
-                        <template #title>
-                            <span>折叠菜单</span>
-                        </template>
-                        <el-menu-item index="4-1">首页</el-menu-item>
-                        <el-menu-item index="4-2">数据大屏</el-menu-item>
-                        <el-menu-item index="4-3">xxx</el-menu-item>
-                    </el-sub-menu>
+                    <Menu :menuList="userStore.menuRoutes"></Menu>
                 </el-menu>
             </el-scrollbar>
         </div>
         <!-- 顶部导航 -->
         <div class="layout_tabbar"></div>
         <!-- 内容展示区 -->
-        <div class="layout_main"></div>
+        <div class="layout_main">
+            <Main></Main>
+            <!-- <router-view></router-view> -->
+        </div>
         <!-- <h1>一级陆游组件</h1> -->
     </div>
 </template>
 
 <script setup lang="ts">
 import Logo from './logo/index.vue'
+import Menu from './menu/index.vue'
+import Main from './main/index.vue'
+import useUserStore from '@/store/modules/user';
+
+let userStore = useUserStore();
 
 </script>
 
@@ -45,6 +43,9 @@ import Logo from './logo/index.vue'
         .scroll_bar {
             width: 100%;
             height: calc(100vh - $base-menu-logo-height);
+            .el-menu {
+                border-right: none;
+            }
         }
     }
 

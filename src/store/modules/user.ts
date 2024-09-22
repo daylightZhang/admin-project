@@ -1,13 +1,15 @@
-import { defineStore } from "pinia";
-import { reqLogin } from "@/api/user";
-import type { loginForm, loginResponseData } from "@/api/user/type";
-import type { userState } from "@/store/modules/types/type";
-import { SET_TOKEN, GET_TOKEN } from "@/utils/token";
+import { defineStore } from "pinia"
+import { reqLogin } from "@/api/user"
+import type { loginForm, loginResponseData } from "@/api/user/type"
+import type { userState } from "@/store/modules/types/type"
+import { SET_TOKEN, GET_TOKEN } from "@/utils/token"
+import { constRoute } from "@/router/routes"
 
 let useUserStore = defineStore("User", {
   state: (): userState => {
     return {
       token: GET_TOKEN(),
+      menuRoutes: constRoute
     };
   },
   actions: {
