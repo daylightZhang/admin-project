@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
+import useUserStore from '@/store/modules/user';
 
 let request = axios.create({
     baseURL: '/api',
@@ -7,6 +8,10 @@ let request = axios.create({
 });
 
 request.interceptors.request.use((config) => {
+    let useStore = useUserStore()
+    if (useStore.token) {
+        config.headers.token = useStore.token
+    }
     return config
 })
 
