@@ -24,12 +24,13 @@
 <script setup lang="ts">
 import { User, Lock } from '@element-plus/icons-vue'
 import { reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { ElNotification } from 'element-plus'
 import useUserStore from '@/store/modules/user'
 import { getWelcomeMessage } from '@/utils/time'
 let useStore = useUserStore() 
 let $router = useRouter()
+let $route = useRoute()
 let loading = ref(false)
 let loginForms = ref()
 let loginForm = reactive({username: '', password: ''})
@@ -38,7 +39,9 @@ const login = async () => {
   loading.value = true
   try {
     await useStore.userLogin(loginForm)
-    $router.push('/')
+    let redirect: any = $route.query.redirect
+
+    $router.push({path: redirect || '/'})
     ElNotification({
       type: 'success',
       message: '欢迎回来',
